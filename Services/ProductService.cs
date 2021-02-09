@@ -10,7 +10,7 @@ namespace buy_easy_api.Services
 {
     public interface IProductService
     {
-        public Task<List<Product>> GetProducts();
+        public Task<IEnumerable<Product>> GetProducts();
         public Task<Product> GetProduct(int id);
         public Task<Product> CreateProduct(Product product);
         public Task<List<Product>> Search(string query);
@@ -19,12 +19,12 @@ namespace buy_easy_api.Services
     {
         private readonly BuyEasyDbContext _dbContext;
 
-        public ProductService(BuyEasyDbContext _context)
+        public ProductService(BuyEasyDbContext context)
         {
-            _dbContext = _context;
+            _dbContext = context;
         }
 
-        public async Task<List<Product>> GetProducts()
+        public async Task<IEnumerable<Product>> GetProducts()
         {
             return await _dbContext.Products.ToListAsync();
         }
@@ -36,7 +36,12 @@ namespace buy_easy_api.Services
 
         public async Task<Product> CreateProduct(Product product)
         {
-            var newProduct = new Product();
+            var newProduct = new Product
+            {
+                Name = product.Name, Brand = product.Brand, Price = product.Price,
+                Quantity = product.Quantity, Type = product.Type
+                
+            };
             _dbContext.Products.Add(newProduct);
             await _dbContext.SaveChangesAsync();
 
