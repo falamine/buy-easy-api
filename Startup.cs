@@ -30,6 +30,7 @@ namespace buy_easy_api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddRazorPages();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo {Title = "buy_easy_api", Version = "v1"});
@@ -52,6 +53,8 @@ namespace buy_easy_api
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "buy_easy_api v1"));
             }
 
+            app.UseStaticFiles();
+            
             app.UseHttpsRedirection();
 
             app.UseRouting();

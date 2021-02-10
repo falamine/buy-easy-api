@@ -10,7 +10,7 @@ namespace buy_easy_api.Services
 {
     public interface IProductService
     {
-        public Task<IEnumerable<Product>> GetProducts();
+        public Task<List<Product>> GetProducts();
         public Task<Product> GetProduct(int id);
         public Task<Product> CreateProduct(Product product);
         public Task<List<Product>> Search(string query);
@@ -24,7 +24,7 @@ namespace buy_easy_api.Services
             _dbContext = context;
         }
 
-        public async Task<IEnumerable<Product>> GetProducts()
+        public async Task<List<Product>> GetProducts()
         {
             return await _dbContext.Products.ToListAsync();
         }
@@ -48,15 +48,25 @@ namespace buy_easy_api.Services
             return newProduct;
         }
 
-        public Task<List<Product>> Search(string query)
+        public async Task<List<Product>> Search(string query)
         {
-            Task<List<Product>> products = null;
+            var products = new List<Product>();
             if (!string.IsNullOrEmpty(query))
             {
-                products =  _dbContext.Products.Where(p => p.Name.Contains(query)).ToListAsync();
+                products =  await _dbContext.Products
+                    .Where(p => p.Name.Contains(query))
+                    .ToListAsync();
             }
 
             return products;
+        }
+
+        public async Task AddToCart(int id)
+        {
+            var product = await _dbContext.Products.FindAsync(id);
+            if (product == null)
+            {
+            }
         }
     }
 }

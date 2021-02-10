@@ -1,0 +1,35 @@
+@model buy_easy_api.Views.Product.SearchResultModel
+@{
+    Layout = "_Layout";
+}
+
+
+<h2>Search Results</h2>
+<hr>
+
+<div class="row">
+    <div class="col-md-6 col-sm-12 offset-1">
+        
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Price</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach (var product in Model.Products)
+            {
+                <tr>
+                    <td>
+                        <a href="/api/product/details/@product.Id">@product.Name</a>
+                    </td>
+                    <td>$ @product.Price</td>
+                </tr>
+            }
+            
+            </tbody>
+        </table>
+        
+    </div>
+</div>

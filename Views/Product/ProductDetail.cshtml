@@ -1,0 +1,22 @@
+@model buy_easy_api.Entities.Product
+
+@{
+    Layout = "_Layout";
+}
+
+<table class="table table-striped">
+    <tbody>
+    <tr>
+        <td>Name</td>
+        <td>@Model.Name</td>
+    </tr>
+    </tbody>
+    <tr>
+        <td>Price</td>
+        <td>@Model.Price</td>
+    </tr>
+    <tr>
+        <td>Brand</td>
+        <td>@Model.Brand</td>
+    </tr>
+</table>

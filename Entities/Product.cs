@@ -1,5 +1,6 @@
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
+using buy_easy_api.Enum;
 
 namespace buy_easy_api.Entities
 {
@@ -8,11 +9,9 @@ namespace buy_easy_api.Entities
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public string Type { get; set; }
+        public ProductType Type { get; set; }
         public int Quantity { get; set; }
         public double Price { get; set; }
-        public bool IsInStock { get; set; } = true;
-        public bool IsOnSale { get; set; } = true;
         public string Brand { get; set; } 
         public int UserId { get; set; }
         

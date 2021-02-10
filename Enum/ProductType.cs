@@ -2,7 +2,7 @@ namespace buy_easy_api.Enum
 {
     public enum ProductType
     {
-        Cloth,
+        Cloth = 1,
         Shoes,
         Electronics,
     }
